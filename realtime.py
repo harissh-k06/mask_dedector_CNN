@@ -10,7 +10,7 @@ while True:
     ret, frame = cap.read()
     if not ret:
         break
-    frame = cv2.flip(frame, 1)  # Fixes the inverted camera
+    frame = cv2.flip(frame, 1) 
 
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     faces = face_cascade.detectMultiScale(gray, 1.3, 5)
@@ -19,7 +19,7 @@ while True:
         face = frame[y:y+h, x:x+w]
         face_resized = cv2.resize(face, (64, 64))
         arr = np.expand_dims(face_resized, axis=0).astype("float32")
-        arr = arr / 255.0  # Make sure to normalize!
+        arr = arr / 255.0  
         pred = model.predict(arr)
         label = "No Mask" if pred[0][0] > 0.5 else "Mask"
         color = (0, 0, 255) if label == "No Mask" else (0, 255, 0)
@@ -33,3 +33,5 @@ while True:
 
 cap.release()
 cv2.destroyAllWindows()
+
+#Under TESTING
